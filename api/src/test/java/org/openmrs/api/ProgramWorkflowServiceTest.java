@@ -479,6 +479,12 @@ public class ProgramWorkflowServiceTest extends BaseContextSensitiveTest {
 	public void getProgramByUuid_shouldReturnNullIfNoObjectFoundWithGivenUuid() {
 		Assert.assertNull(Context.getProgramWorkflowService().getProgramByUuid("some invalid uuid"));
 	}
+
+	@Test
+	public void getPrograms_shouldGetProgramByNameFragment() {
+		List<Program> programs = pws.getPrograms("program name");
+		assertEquals(1, programs.size());
+	}
 	
 	@Test
 	public void getState_shouldGetStateAssociatedWithGivenIdIfWorkflowStateIdExists() {
