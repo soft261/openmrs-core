@@ -486,12 +486,21 @@ public class ProgramWorkflowServiceTest extends BaseContextSensitiveTest {
 		PatientProgram voidedPatientProgram = pws.voidPatientProgram(patientProgram, "for testing");
 		assertEquals(voidedPatientProgram.getVoided(), true);
 	}
+	
+	@Test
+	public void unvoidPatientProgram_shouldUnvoidPatientProgram() {
+		PatientProgram patientProgram = pws.getPatientProgram(1);
+		PatientProgram voidedPatientProgram = pws.voidPatientProgram(patientProgram, "for testing");
+		PatientProgram unVoidedPatientProgram = pws.unvoidPatientProgram(voidedPatientProgram);
+		assertEquals(unVoidedPatientProgram.getVoided(), false);
+	}
 
 	@Test
 	public void getPrograms_shouldGetProgramByNameFragment() {
 		List<Program> programs = pws.getPrograms("program name");
 		assertEquals(1, programs.size());
 	}
+	
 	
 	@Test
 	public void getState_shouldGetStateAssociatedWithGivenIdIfWorkflowStateIdExists() {
