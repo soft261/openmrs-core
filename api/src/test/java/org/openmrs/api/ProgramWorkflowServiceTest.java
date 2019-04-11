@@ -500,7 +500,14 @@ public class ProgramWorkflowServiceTest extends BaseContextSensitiveTest {
 		List<Program> programs = pws.getPrograms("program name");
 		assertEquals(1, programs.size());
 	}
-	
+
+	@Test
+	public void unretireProgram_shouldUnRetireProgram() {
+		Program program = pws.getProgram(1);
+		Program retiredProgram = pws.retireProgram(program, "for testing");
+		Program unretiredProgram = pws.unretireProgram(retiredProgram);
+		assertEquals(unretiredProgram.getRetired(), false);
+	}
 	
 	@Test
 	public void getState_shouldGetStateAssociatedWithGivenIdIfWorkflowStateIdExists() {
