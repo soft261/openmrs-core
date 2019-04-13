@@ -24,7 +24,9 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.openmrs.Concept;
 import org.openmrs.ConceptName;
 import org.openmrs.ConceptStateConversion;
@@ -52,13 +54,16 @@ public class ProgramWorkflowServiceTest extends BaseContextSensitiveTest {
 	
 	protected static final String PROGRAM_ATTRIBUTES_XML = "org/openmrs/api/include/ProgramAttributesDataset.xml";
         
-        protected ProgramWorkflowService pws = null;
+	protected ProgramWorkflowService pws = null;
 	
 	protected AdministrationService adminService = null;
 	
 	protected EncounterService encounterService = null;
 	
 	protected ConceptService cs = null;
+
+	@Rule
+	public final ExpectedException exception = ExpectedException.none();
 	
 	@Before
 	public void runBeforeEachTest() {
@@ -685,6 +690,26 @@ public class ProgramWorkflowServiceTest extends BaseContextSensitiveTest {
 		pp = pws.getPatientProgram(patientProgramId);
 		Assert.assertEquals(originalDateCompleted, pp.getDateCompleted());
 	}
+
+	@Test
+	public void saveStateConversion_shouldReturnValidConceptStateConversion(){
+		PatientProgram patientProgram = pws.getPatientProgram(1);
+		ConceptStateConversion csc = new ConceptStateConversion();
+		Concept deathConcept = cs.getConcept(16);
+		ProgramWorkflow pw = patientProgram.getProgram().getWorkflow(1);
+		ProgramWorkflowState state = patientProgram.getProgram().getWorkflow(1).getState(1);
+		
+		Assert.assertNotNull(patientProgram.getProgram().getWorkflow(1));
+		Assert.assertNotNull(patientProgram.getProgram().getWorkflow(1).getState(deathConcept));
+		Assert.assertNotNull(patientProgram.getProgram().getWorkflow(1).getState(1));
+		
+		csc.setConcept(deathConcept);
+		csc.setProgramWorkflow(pw);
+		csc.setProgramWorkflowState(state);
+		
+		Assert.assertNotNull(pws.saveConceptStateConversion(csc));
+	}
+	
 	
 	@Test
 	public void getProgramByName_shouldReturnProgramWhenNameMatches() {

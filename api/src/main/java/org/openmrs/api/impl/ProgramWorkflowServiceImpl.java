@@ -446,7 +446,7 @@ public class ProgramWorkflowServiceImpl extends BaseOpenmrsService implements Pr
 	public void triggerStateConversion(Patient patient, Concept trigger, Date dateConverted) {
 		
 		// Check input parameters
-		if (patient == null) {
+		if (patient  == null) {
 			throw new APIException("convert.state.invalid.patient", (Object[]) null);
 		}
 		if (trigger == null) {

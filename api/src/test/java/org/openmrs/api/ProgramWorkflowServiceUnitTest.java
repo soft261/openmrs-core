@@ -10,6 +10,8 @@
 package org.openmrs.api;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -42,9 +44,7 @@ public class ProgramWorkflowServiceUnitTest {
 	public final ExpectedException exception = ExpectedException.none();
 	
 	@Before
-	public void setup() {
-		pws = new ProgramWorkflowServiceImpl();
-	}
+	public void setup() { pws = new ProgramWorkflowServiceImpl(); }
 	
 	@Test
 	public void getProgramByName_shouldCallDaoGetProgramsByName() {
