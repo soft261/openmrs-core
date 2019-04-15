@@ -1210,8 +1210,8 @@ public class OpenmrsUtil {
 			token = token.trim();
 			if (token.length() != 0) {
 				ret.add(Integer.valueOf(token));
-			}
-		} 
+			} 
+		}
 		return ret;
 	}
 	
