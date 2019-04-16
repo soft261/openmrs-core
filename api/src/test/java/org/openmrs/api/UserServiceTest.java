@@ -1302,12 +1302,12 @@ public class UserServiceTest extends BaseContextSensitiveTest {
 	}
 
     @Test
-	public void changePassword_shouldThrowInvalidPasswordExceptionWithShortPassword() {
-        expectedException.expect(InvalidPasswordException.class);
+	public void changePassword_shouldThrowShortPasswordExceptionWithShortPassword() {
+        expectedException.expect(ShortPasswordException.class);
         expectedException.expectMessage(
 		        messages.getMessage("error.password.length", new Object[] {"8"}, null));
 
-        userService.changePassword("test", "Admin1");
+        userService.changePassword("test", "");
     }
     
 	@Test

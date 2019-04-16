@@ -89,8 +89,10 @@ import org.openmrs.annotation.HasAddOnStartupPrivileges;
 import org.openmrs.api.APIException;
 import org.openmrs.api.AdministrationService;
 import org.openmrs.api.ConceptService;
+import org.openmrs.api.InvalidCharactersPasswordException;
 import org.openmrs.api.PasswordException;
-import org.openmrs.api.InvalidPasswordException;
+import org.openmrs.api.ShortPasswordException;
+import org.openmrs.api.WeakPasswordException;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.ModuleException;
 import org.openmrs.module.ModuleFactory;
@@ -1817,7 +1819,6 @@ public class OpenmrsUtil {
 		String nonDigitGp = "true";
 		String regexGp = null;
 		AdministrationService svc = null;
-		List errors = new ArrayList();
 		
 		try {
 			svc = Context.getAdministrationService();
@@ -1840,22 +1841,18 @@ public class OpenmrsUtil {
 		}
 		
 		if (password == null) {
-			throw new InvalidPasswordException();
+			throw new WeakPasswordException();
 		}
 		
-		if ("true".equals(userGp) && password.equals(username)) {
-			errors.add(getMessage("error.password.matchingUsername"));
-		}
-		
-		if ("true".equals(userGp) && password.equals(systemId)) {
-			errors.add(getMessage("error.password.matchingSystemID"));
+		if ("true".equals(userGp) && (password.equals(username) || password.equals(systemId))) {
+			throw new WeakPasswordException();
 		}
 		
 		if (StringUtils.isNotEmpty(lengthGp)) {
 			try {
 				int minLength = Integer.parseInt(lengthGp);
 				if (password.length() < minLength) {
-					errors.add(getMessage("error.password.length", lengthGp));
+					throw new ShortPasswordException(getMessage("error.password.length", lengthGp));
 				}
 			}
 			catch (NumberFormatException nfe) {
@@ -1865,15 +1862,15 @@ public class OpenmrsUtil {
 		}
 		
 		if ("true".equals(caseGp) && !containsUpperAndLowerCase(password)) {
-			errors.add(getMessage("error.password.requireMixedCase"));
+			throw new InvalidCharactersPasswordException(getMessage("error.password.requireMixedCase"));
 		}
 		
 		if ("true".equals(digitGp) && !containsDigit(password)) {
-			errors.add(getMessage("error.password.requireNumber"));
+			throw new InvalidCharactersPasswordException(getMessage("error.password.requireNumber"));
 		}
 		
 		if ("true".equals(nonDigitGp) && containsOnlyDigits(password)) {
-			errors.add(getMessage("error.password.requireLetter"));
+			throw new InvalidCharactersPasswordException(getMessage("error.password.requireLetter"));
 		}
 		
 		if (StringUtils.isNotEmpty(regexGp)) {
@@ -1881,17 +1878,13 @@ public class OpenmrsUtil {
 				Pattern pattern = Pattern.compile(regexGp);
 				Matcher matcher = pattern.matcher(password);
 				if (!matcher.matches()) {
-					errors.add(getMessage("error.password.different"));
+					throw new InvalidCharactersPasswordException(getMessage("error.password.different"));
 				}
 			}
 			catch (PatternSyntaxException pse) {
 				log.warn("Invalid regex of " + regexGp + " defined in global property <"
 				        + OpenmrsConstants.GP_PASSWORD_CUSTOM_REGEX + ">.");
 			}
-		}
-		
-		if (!errors.isEmpty()) {
-			throw new InvalidPasswordException(String.join(". ", errors));
 		}
 	}
 	
