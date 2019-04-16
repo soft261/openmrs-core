@@ -39,6 +39,7 @@ import org.openmrs.ProgramWorkflow;
 import org.openmrs.ProgramWorkflowState;
 import org.openmrs.User;
 import org.openmrs.api.context.Context;
+import org.openmrs.api.impl.ProgramWorkflowServiceImpl;
 import org.openmrs.test.BaseContextSensitiveTest;
 import org.openmrs.test.TestUtil;
 
@@ -803,7 +804,7 @@ public class ProgramWorkflowServiceTest extends BaseContextSensitiveTest {
 		pws.purgeProgramAttributeType(programAttributeType);
 		assertEquals((totalAttributeTypes - 1), pws.getAllProgramAttributeTypes().size());
 }
-	
+
 	@Test
 	public void getProgramWorkflowServiceByConcept_shouldReturnPWS(){
 		Concept concept = new Concept(1);
