@@ -76,8 +76,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	
 	/**
 	 * test the collection contains method
-	 *
-	 * @see OpenmrsUtil#collectionContains(Collection, Object)
+	 * 
+	 * @see OpenmrsUtil#collectionContains(Collection,Object)
 	 */
 	@Test
 	public void collectionContains_shouldUseEqualsMethodForComparisonInsteadOfCompareToGivenListCollection() {
@@ -135,14 +135,14 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	/**
 	 * When given a null parameter, the {@link OpenmrsUtil#url2file(java.net.URL)} method should
 	 * quietly fail by returning null
-	 *
+	 * 
 	 * @see OpenmrsUtil#url2file(URL)
 	 */
 	@Test
 	public void url2file_shouldReturnNullGivenNullParameter() {
 		assertNull(OpenmrsUtil.url2file(null));
 	}
-	
+
 	/**
 	 * @see OpenmrsUtil#validatePassword(String, String, String)
 	 */
