@@ -227,12 +227,38 @@ public class ProgramWorkflowServiceUnitTest {
 	}
 	
 	@Test
-	public void saveConceptStateConversion_shouldFailIfRequiredParametersMissing() {
+	public void saveConceptStateConversion_shouldFailIfAllRequiredParametersMissing() {
 		
 		exception.expect(APIException.class);
 		exception.expectMessage("ConceptStateConversion requires a Concept, ProgramWorkflow, and ProgramWorkflowState");
 		
 		ConceptStateConversion conceptStateConversion = new ConceptStateConversion(1);
+		pws.saveConceptStateConversion(conceptStateConversion);
+	}
+	
+	@Test
+	public void saveConceptStateConversion_shouldFailIfProgramWorkflowProgramWorkFlowStateMissing() {
+		
+		exception.expect(APIException.class);
+		exception.expectMessage("ConceptStateConversion requires a Concept, ProgramWorkflow, and ProgramWorkflowState");
+
+		ConceptStateConversion conceptStateConversion = new ConceptStateConversion(1);
+		Concept concept = new Concept(1);
+		conceptStateConversion.setConcept(concept);
+		pws.saveConceptStateConversion(conceptStateConversion);
+	}
+
+	@Test
+	public void saveConceptStateConversion_shouldFailIfProgramWorkflowStateMissing() {
+
+		exception.expect(APIException.class);
+		exception.expectMessage("ConceptStateConversion requires a Concept, ProgramWorkflow, and ProgramWorkflowState");
+
+		ConceptStateConversion conceptStateConversion = new ConceptStateConversion(1);
+		Concept concept = new Concept(1);
+		ProgramWorkflow pwf = new ProgramWorkflow(1);
+		conceptStateConversion.setConcept(concept);
+		conceptStateConversion.setProgramWorkflow(pwf);
 		pws.saveConceptStateConversion(conceptStateConversion);
 	}
 }
