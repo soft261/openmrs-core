@@ -3,7 +3,6 @@
  * v. 2.0. If a copy of the MPL was not distributed with this file, You can
  * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
  * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
- *
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
@@ -28,6 +27,7 @@ import org.openmrs.ProgramWorkflow;
 import org.openmrs.ProgramWorkflowState;
 import org.openmrs.api.db.ProgramWorkflowDAO;
 import org.openmrs.api.impl.ProgramWorkflowServiceImpl;
+
 import java.util.Date;
 
 /**
@@ -37,15 +37,17 @@ import java.util.Date;
  * of PatientService, hence implementing true unit (and not integration) tests
  */
 public class ProgramWorkflowServiceUnitTest {
-	
+
 	private ProgramWorkflowService pws;
-	
+
 	@Rule
 	public final ExpectedException exception = ExpectedException.none();
-	
+
 	@Before
-	public void setup() { pws = new ProgramWorkflowServiceImpl(); }
-	
+	public void setup() {
+		pws = new ProgramWorkflowServiceImpl();
+	}
+
 	@Test
 	public void getProgramByName_shouldCallDaoGetProgramsByName() {
 		ProgramWorkflowDAO mockDao = Mockito.mock(ProgramWorkflowDAO.class);
@@ -54,7 +56,7 @@ public class ProgramWorkflowServiceUnitTest {
 		Mockito.verify(mockDao).getProgramsByName("A name", false);
 		Mockito.verify(mockDao).getProgramsByName("A name", true);
 	}
-	
+
 	@Test
 	public void getProgramByName_shouldReturnNullWhenThereIsNoProgramForGivenName() {
 		ProgramWorkflowDAO mockDao = Mockito.mock(ProgramWorkflowDAO.class);
@@ -64,7 +66,7 @@ public class ProgramWorkflowServiceUnitTest {
 		pws.setProgramWorkflowDAO(mockDao);
 		Assert.assertNull(pws.getProgramByName("A name"));
 	}
-	
+
 	@Test(expected = org.openmrs.api.ProgramNameDuplicatedException.class)
 	public void getProgramByName_shouldFailWhenTwoProgramsFoundWithSameName() {
 		ProgramWorkflowDAO mockDao = Mockito.mock(ProgramWorkflowDAO.class);
@@ -78,181 +80,181 @@ public class ProgramWorkflowServiceUnitTest {
 		pws.setProgramWorkflowDAO(mockDao);
 		pws.getProgramByName("A name");
 	}
-	
+
 	@Test
 	public void saveProgram_shouldFailIfProgramConceptIsNull() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("Program concept is required");
-		
+
 		Program program1 = new Program(1);
-		
+
 		pws.saveProgram(program1);
 	}
-	
+
 	@Test
 	public void saveProgram_shouldFailIfProgramWorkFlowConceptIsNull() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("ProgramWorkflow concept is required");
-		
+
 		Program program = new Program();
 		program.setName("TEST PROGRAM");
 		program.setDescription("TEST PROGRAM DESCRIPTION");
 		program.setConcept(new Concept(1));
 		program.addWorkflow(new ProgramWorkflow());
-		
+
 		pws.saveProgram(program);
 	}
-	
+
 	@Test
 	public void saveProgram_shouldFailIfProgramWorkFlowStateConceptIsNull() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("ProgramWorkflowState concept, initial, terminal are required");
-		
+
 		Program program = new Program();
 		program.setName("TEST PROGRAM");
 		program.setDescription("TEST PROGRAM DESCRIPTION");
 		program.setConcept(new Concept(1));
-		
+
 		ProgramWorkflow workflow = new ProgramWorkflow();
 		workflow.setConcept(new Concept(2));
-		
+
 		ProgramWorkflowState state1 = new ProgramWorkflowState();
 		state1.setInitial(true);
 		state1.setTerminal(false);
-		
+
 		workflow.addState(state1);
 		program.addWorkflow(workflow);
-		
+
 		pws.saveProgram(program);
 	}
-	
+
 	@Test
 	public void saveProgram_shouldFailIfProgramWorkFlowStateInitialIsNull() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("ProgramWorkflowState concept, initial, terminal are required");
-		
+
 		Program program = new Program();
 		program.setName("TEST PROGRAM");
 		program.setDescription("TEST PROGRAM DESCRIPTION");
 		program.setConcept(new Concept(1));
-		
+
 		ProgramWorkflow workflow = new ProgramWorkflow();
 		workflow.setConcept(new Concept(2));
-		
+
 		ProgramWorkflowState state1 = new ProgramWorkflowState();
 		state1.setConcept(new Concept(3));
 		state1.setTerminal(false);
-		
+
 		workflow.addState(state1);
 		program.addWorkflow(workflow);
-		
+
 		pws.saveProgram(program);
 	}
-	
+
 	@Test
 	public void saveProgram_shouldFailIfProgramWorkFlowStateTerminalIsNull() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("ProgramWorkflowState concept, initial, terminal are required");
-		
+
 		Program program = new Program();
 		program.setName("TEST PROGRAM");
 		program.setDescription("TEST PROGRAM DESCRIPTION");
 		program.setConcept(new Concept(1));
-		
+
 		ProgramWorkflow workflow = new ProgramWorkflow();
 		workflow.setConcept(new Concept(2));
-		
+
 		ProgramWorkflowState state1 = new ProgramWorkflowState();
 		state1.setConcept(new Concept(3));
 		state1.setInitial(true);
-		
+
 		workflow.addState(state1);
 		program.addWorkflow(workflow);
-		
+
 		pws.saveProgram(program);
 	}
-	
+
 	@Test
 	public void savePatientProgram_shouldFailForNullPatient() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("PatientProgram requires a Patient and a Program");
-		
+
 		PatientProgram patientProgram = new PatientProgram(1);
 		patientProgram.setProgram(new Program(1));
-		
+
 		pws.savePatientProgram(patientProgram);
 	}
-	
+
 	@Test
 	public void savePatientProgram_shouldFailForNullProgram() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("PatientProgram requires a Patient and a Program");
-		
+
 		PatientProgram patientProgram = new PatientProgram(1);
 		patientProgram.setPatient(new Patient(1));
-		
+
 		pws.savePatientProgram(patientProgram);
 	}
-	
+
 	@Test
 	public void purgePatientProgram_shouldFailGivenNonEmptyStatesAndTrueCascade() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("Cascade purging of PatientPrograms is not implemented yet");
-		
+
 		PatientProgram patientProgram = new PatientProgram();
 		PatientState patientState = new PatientState();
 		patientProgram.getStates().add(patientState);
-		
+
 		pws.purgePatientProgram(patientProgram, true);
 	}
-	
+
 	@Test
 	public void purgeProgram_shouldFailGivenNonEmptyWorkFlowsAndTrueCascade() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("Cascade purging of Programs is not implemented yet");
-		
+
 		Program program = new Program(1);
 		ProgramWorkflow workflow = new ProgramWorkflow(1);
 		program.addWorkflow(workflow);
-		
+
 		pws.purgeProgram(program, true);
 	}
-	
+
 	@Test
 	public void triggerStateConversion_shouldFailGivenNullPatient() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("Attempting to convert state of an invalid patient");
-		
+
 		Patient patient = null;
 		Concept concept = new Concept(1);
 		Date date = new Date(1);
-		
+
 		ProgramWorkflowServiceImpl programWorkflowService = new ProgramWorkflowServiceImpl();
-		programWorkflowService.triggerStateConversion(patient,concept,date);
+		programWorkflowService.triggerStateConversion(patient, concept, date);
 	}
 
 	@Test
 	public void triggerStateConversion_shouldFailGivenInvalidTriggerConcept() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("Attempting to convert state for a patient without a valid trigger concept");
-		
+
 		Patient patient = new Patient(1);
 		Concept concept = null;
 		Date date = new Date(1);
-		
+
 		ProgramWorkflowServiceImpl programWorkflowService = new ProgramWorkflowServiceImpl();
-		programWorkflowService.triggerStateConversion(patient,concept,date);
+		programWorkflowService.triggerStateConversion(patient, concept, date);
 	}
 
 	@Test
@@ -268,21 +270,21 @@ public class ProgramWorkflowServiceUnitTest {
 		ProgramWorkflowServiceImpl programWorkflowService = new ProgramWorkflowServiceImpl();
 		programWorkflowService.triggerStateConversion(patient, concept, date);
 	}
-	
-	@Test	
+
+	@Test
 	public void saveConceptStateConversion_shouldFailIfAllRequiredParametersMissing() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("ConceptStateConversion requires a Concept, ProgramWorkflow, and ProgramWorkflowState");
-		
+
 		ConceptStateConversion conceptStateConversion = new ConceptStateConversion(1);
 		pws.saveConceptStateConversion(conceptStateConversion);
 
 	}
-	
+
 	@Test
 	public void saveConceptStateConversion_shouldFailIfProgramWorkflowProgramWorkFlowStateMissing() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("ConceptStateConversion requires a Concept, ProgramWorkflow, and ProgramWorkflowState");
 
