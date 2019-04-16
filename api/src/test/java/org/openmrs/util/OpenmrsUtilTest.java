@@ -105,8 +105,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	
 	/**
 	 * test the collection contains method
-	 *
-	 * @see OpenmrsUtil#collectionContains(Collection, Object)
+	 * 
+	 * @see OpenmrsUtil#collectionContains(Collection,Object)
 	 */
 	@Test
 	public void collectionContains_shouldUseEqualsMethodForComparisonInsteadOfCompareToGivenSortedSetCollection() {
@@ -128,8 +128,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		pi.setDateCreated(null);
 		pi.setCreator(null);
 		
-		assertTrue("Just because the date is null, doesn't make it not in the list anymore",
-		    OpenmrsUtil.collectionContains(identifiers, pi));
+		assertTrue("Just because the date is null, doesn't make it not in the list anymore", OpenmrsUtil.collectionContains(identifiers, pi));
 	}
 	
 	/**
@@ -144,7 +143,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithDigitOnlyPasswordByDefault() {
@@ -159,7 +158,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithDigitOnlyPasswordIfNotAllowed() {
@@ -175,7 +174,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldPassWithDigitOnlyPasswordIfAllowed() {
@@ -185,7 +184,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithCharOnlyPasswordByDefault() {
@@ -200,7 +199,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithCharOnlyPasswordIfNotAllowed() {
@@ -216,7 +215,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldPassWithCharOnlyPasswordIfAllowed() {
@@ -226,7 +225,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithoutUpperAndLowerCasePasswordByDefault() {
@@ -241,7 +240,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithoutUpperAndLowerCasePasswordIfNotAllowed() {
@@ -258,7 +257,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldPassWithoutUpperAndLowerCasePasswordIfAllowed() {
@@ -267,7 +266,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithPasswordEqualsToUserNameByDefault() {
@@ -282,7 +281,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithPasswordEqualsToUserNameIfNotAllowed() {
@@ -298,7 +297,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldPassWithPasswordEqualsToUserNameIfAllowed() {
@@ -307,7 +306,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithPasswordEqualsToSystemIdByDefault() {
@@ -322,7 +321,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithPasswordEqualsToSystemIdIfNotAllowed() {
@@ -338,7 +337,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldPassWithPasswordEqualsToSystemIdIfAllowed() {
@@ -347,7 +346,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithShortPasswordByDefault() {
@@ -362,7 +361,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithShortPasswordIfNotAllowed() {
@@ -378,7 +377,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldPassWithShortPasswordIfAllowed() {
@@ -387,7 +386,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test(expected = InvalidPasswordException.class)
 	public void validatePassword_shouldFailWithPasswordNotMatchingConfiguredRegex() {
@@ -404,7 +403,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldPassWithPasswordMatchingConfiguredRegex() {
@@ -414,7 +413,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldAllowPasswordToContainNonAlphanumericCharacters() {
@@ -422,7 +421,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldAllowPasswordToContainWhiteSpaces() {
@@ -621,8 +620,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		
 		// verify changing the pattern on our variable does not affect the cache
 		sdf.applyPattern("yyyymmdd");
-		Assert.assertTrue("initial dateFormatCache pattern is modifiable",
-		    !OpenmrsUtil.getDateFormat(locale).toPattern().equals(sdf.toPattern()));
+		Assert.assertTrue("initial dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern().equals(sdf.toPattern()));
 		
 		// the dateformat cache now contains the format for this locale; checking
 		// a second time will guarantee we are looking at cached data and not the
@@ -632,8 +630,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		
 		// verify changing the pattern on our variable does not affect the cache
 		sdf.applyPattern("yyyymmdd");
-		Assert.assertTrue("cached dateFormatCache pattern is modifiable",
-		    !OpenmrsUtil.getDateFormat(locale).toPattern().equals(sdf.toPattern()));
+		Assert.assertTrue("cached dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern().equals(sdf.toPattern()));
 	}
 	
 	@Test
@@ -779,7 +776,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		        + "\tat org.openmrs.scheduler.tasks.ProcessHL7InQueueTask.execute(ProcessHL7InQueueTask.java:57)\n"
 		        + "\tat org.openmrs.scheduler.tasks.TaskThreadedInitializationWrapper.execute(TaskThreadedInitializationWrapper.java:72)\n"
 		        + "\tat org.openmrs.scheduler.timer.TimerSchedulerTask.run(TimerSchedulerTask.java:48)\n"
-		        + "\tat java.util.TimerThread.mainLoop(Timer.java:512)\n" + "\tat java.util.TimerThread.run(Timer.java:462) "
+		        + "\tat java.util.TimerThread.mainLoop(Timer.java:512)\n"
+		        + "\tat java.util.TimerThread.run(Timer.java:462) "
 		        + "Caused by: ca.uhn.hl7v2.app.ApplicationException: ca.uhn.hl7v2.HL7Exception: Could not resolve patient by identifier\n"
 		        + "\tat org.openmrs.hl7.handler.ORUR01Handler.processMessage(ORUR01Handler.java:132)\n"
 		        + "\tat ca.uhn.hl7v2.app.MessageTypeRouter.processMessage(MessageTypeRouter.java:52)\n"
@@ -790,14 +788,22 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		        + "\tat org.openmrs.hl7.handler.ORUR01Handler.processMessage(ORUR01Handler.java:124) ... 103 more";
 		String expected = "ca.uhn.hl7v2.HL7Exception: Error while processing HL7 message: ORU_R01\n"
 		        + "\tat org.openmrs.hl7.impl.HL7ServiceImpl.processHL7Message(HL7ServiceImpl.java:752)\n"
-		        + "\tat [ignored] ...\n" + "\tat $Proxy106.processHL7Message(Unknown Source)\n" + "\tat [ignored] ...\n"
-		        + "\tat org.openmrs.aop.LoggingAdvice.invoke(LoggingAdvice.java:107)\n" + "\tat [ignored] ...\n"
-		        + "\tat $Proxy107.processHL7Message(Unknown Source)\n" + "\tat [ignored] ...\n"
-		        + "\tat $Proxy107.processHL7Message(Unknown Source)\n" + "\tat [ignored] ...\n"
+		        + "\tat [ignored] ...\n"
+		        + "\tat $Proxy106.processHL7Message(Unknown Source)\n"
+		        + "\tat [ignored] ...\n"
+		        + "\tat org.openmrs.aop.LoggingAdvice.invoke(LoggingAdvice.java:107)\n"
+		        + "\tat [ignored] ...\n"
+		        + "\tat $Proxy107.processHL7Message(Unknown Source)\n"
+		        + "\tat [ignored] ...\n"
+		        + "\tat $Proxy107.processHL7Message(Unknown Source)\n"
+		        + "\tat [ignored] ...\n"
 		        + "\tat $Proxy138.processHL7Message(Unknown Source)\n"
 		        + "\tat org.openmrs.hl7.impl.HL7ServiceImpl.processHL7InQueue(HL7ServiceImpl.java:657)\n"
-		        + "\tat [ignored] ...\n" + "\tat $Proxy106.processHL7InQueue(Unknown Source)\n" + "\tat [ignored] ...\n"
-		        + "\tat org.openmrs.aop.LoggingAdvice.invoke(LoggingAdvice.java:107)\n" + "\tat [ignored] ...\n"
+		        + "\tat [ignored] ...\n"
+		        + "\tat $Proxy106.processHL7InQueue(Unknown Source)\n"
+		        + "\tat [ignored] ...\n"
+		        + "\tat org.openmrs.aop.LoggingAdvice.invoke(LoggingAdvice.java:107)\n"
+		        + "\tat [ignored] ...\n"
 		        + "\tat $Proxy138.processHL7InQueue(Unknown Source)\n"
 		        + "\tat org.openmrs.hl7.HL7InQueueProcessor.processHL7InQueue(HL7InQueueProcessor.java:61)\n"
 		        + "\tat org.openmrs.hl7.HL7InQueueProcessor.processNextHL7InQueue(HL7InQueueProcessor.java:91)\n"
@@ -805,7 +811,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		        + "\tat org.openmrs.scheduler.tasks.ProcessHL7InQueueTask.execute(ProcessHL7InQueueTask.java:57)\n"
 		        + "\tat org.openmrs.scheduler.tasks.TaskThreadedInitializationWrapper.execute(TaskThreadedInitializationWrapper.java:72)\n"
 		        + "\tat org.openmrs.scheduler.timer.TimerSchedulerTask.run(TimerSchedulerTask.java:48)\n"
-		        + "\tat java.util.TimerThread.mainLoop(Timer.java:512)\n" + "\tat java.util.TimerThread.run(Timer.java:462) "
+		        + "\tat java.util.TimerThread.mainLoop(Timer.java:512)\n"
+		        + "\tat java.util.TimerThread.run(Timer.java:462) "
 		        + "Caused by: ca.uhn.hl7v2.app.ApplicationException: ca.uhn.hl7v2.HL7Exception: Could not resolve patient by identifier\n"
 		        + "\tat org.openmrs.hl7.handler.ORUR01Handler.processMessage(ORUR01Handler.java:132)\n"
 		        + "\tat ca.uhn.hl7v2.app.MessageTypeRouter.processMessage(MessageTypeRouter.java:52)\n"
