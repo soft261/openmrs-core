@@ -701,7 +701,7 @@ public class ProgramWorkflowServiceTest extends BaseContextSensitiveTest {
 	}
 
 	@Test
-	public void saveStateConversion_shouldReturnValidConceptStateConversion(){
+	public void saveConceptStateConversion_shouldReturnValidConceptStateConversion(){
 		PatientProgram patientProgram = pws.getPatientProgram(1);
 		ConceptStateConversion csc = new ConceptStateConversion();
 		Concept deathConcept = cs.getConcept(16);
@@ -804,6 +804,18 @@ public class ProgramWorkflowServiceTest extends BaseContextSensitiveTest {
 		pws.purgeProgramAttributeType(programAttributeType);
 		assertEquals((totalAttributeTypes - 1), pws.getAllProgramAttributeTypes().size());
 }
+
+	@Test
+	public void getProgramWorkflowServiceByConcept_shouldReturnPWS(){
+		Concept concept = new Concept(1);
+		Assert.assertNotNull(pws.getProgramWorkflowsByConcept(concept));
+	}
+	
+	@Test
+	public void getProgramWorkflowStatesByConcept_shouldReturnProgramWorkflowState(){
+		Concept concept = new Concept(1);
+		Assert.assertNotNull(pws.getProgramWorkflowStatesByConcept(concept));
+	}
 	
 	//	/**
 	//	 * This method should be uncommented when you want to examine the actual hibernate
