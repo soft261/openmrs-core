@@ -10,8 +10,6 @@
 package org.openmrs.api;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -21,6 +19,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.openmrs.Concept;
+import org.openmrs.ConceptStateConversion;
 import org.openmrs.Patient;
 import org.openmrs.PatientProgram;
 import org.openmrs.PatientState;
@@ -29,6 +28,7 @@ import org.openmrs.ProgramWorkflow;
 import org.openmrs.ProgramWorkflowState;
 import org.openmrs.api.db.ProgramWorkflowDAO;
 import org.openmrs.api.impl.ProgramWorkflowServiceImpl;
+import java.util.Date;
 
 /**
  * This class unit tests methods in the ProgramWorkflowService class.
@@ -257,15 +257,26 @@ public class ProgramWorkflowServiceUnitTest {
 
 	@Test
 	public void triggerStateConversion_shouldFailGivenInvalidDate() {
-		
+
 		exception.expect(APIException.class);
 		exception.expectMessage("Invalid date for converting patient state");
-		
+
 		Patient patient = new Patient(1);
 		Concept concept = new Concept(1);
 		Date date = null;
 
 		ProgramWorkflowServiceImpl programWorkflowService = new ProgramWorkflowServiceImpl();
-		programWorkflowService.triggerStateConversion(patient,concept,date);
+		programWorkflowService.triggerStateConversion(patient, concept, date);
+	}
+	
+	@Test	
+	public void saveConceptStateConversion_shouldFailIfRequiredParametersMissing() {
+		
+		exception.expect(APIException.class);
+		exception.expectMessage("ConceptStateConversion requires a Concept, ProgramWorkflow, and ProgramWorkflowState");
+		
+		ConceptStateConversion conceptStateConversion = new ConceptStateConversion(1);
+		pws.saveConceptStateConversion(conceptStateConversion);
+
 	}
 }
