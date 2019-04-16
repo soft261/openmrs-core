@@ -515,6 +515,14 @@ public class ProgramWorkflowServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
+	public void purgeConceptStateConversion_shouldPurge() {
+		ConceptStateConversion conceptStateConversion = pws.getConceptStateConversion(1);
+		pws.purgeConceptStateConversion(conceptStateConversion);
+		conceptStateConversion = pws.getConceptStateConversion(1);
+		assertNull(conceptStateConversion);
+	}
+	
+	@Test
 	public void getState_shouldGetStateAssociatedWithGivenIdIfWorkflowStateIdExists() {
 		
 		final Integer EXISTING_WORKFLOW_STATE_ID = 1;
