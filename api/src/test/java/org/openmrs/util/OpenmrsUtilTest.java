@@ -80,8 +80,9 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	 * @see OpenmrsUtil#collectionContains(Collection,Object)
 	 */
 	@Test
-	public void collectionContains_shouldUseEqualsMethodForComparisonInsteadOfCompareToGivenListCollection() {
-		
+	public void collectionContains_shouldUseEqualsMethodForComparisonInsteadOfCompareToGivenListCollection() 
+	{
+	
 		ArrayList<PatientIdentifier> identifiers = new ArrayList<>();
 		
 		PatientIdentifier pi = new PatientIdentifier();
@@ -99,8 +100,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		pi.setDateCreated(null);
 		pi.setCreator(null);
 		
-		assertTrue("Just because the date is null, doesn't make it not in the list anymore",
-		    OpenmrsUtil.collectionContains(identifiers, pi));
+		assertTrue("Just because the date is null, doesn't make it not in the list anymore", OpenmrsUtil.collectionContains(
+			identifiers, pi));
 	}
 	
 	/**
@@ -109,7 +110,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	 * @see OpenmrsUtil#collectionContains(Collection,Object)
 	 */
 	@Test
-	public void collectionContains_shouldUseEqualsMethodForComparisonInsteadOfCompareToGivenSortedSetCollection() {
+	public void collectionContains_shouldUseEqualsMethodForComparisonInsteadOfCompareToGivenSortedSetCollection()
+	{
 		
 		SortedSet<PatientIdentifier> identifiers = new TreeSet<>();
 		
@@ -128,7 +130,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		pi.setDateCreated(null);
 		pi.setCreator(null);
 		
-		assertTrue("Just because the date is null, doesn't make it not in the list anymore", OpenmrsUtil.collectionContains(identifiers, pi));
+		assertTrue("Just because the date is null, doesn't make it not in the list anymore", OpenmrsUtil.collectionContains(
+			identifiers, pi));
 	}
 	
 	/**
@@ -620,7 +623,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		
 		// verify changing the pattern on our variable does not affect the cache
 		sdf.applyPattern("yyyymmdd");
-		Assert.assertTrue("initial dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern().equals(sdf.toPattern()));
+		Assert.assertTrue("initial dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern()
+				.equals(sdf.toPattern()));
 		
 		// the dateformat cache now contains the format for this locale; checking
 		// a second time will guarantee we are looking at cached data and not the
@@ -630,7 +634,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		
 		// verify changing the pattern on our variable does not affect the cache
 		sdf.applyPattern("yyyymmdd");
-		Assert.assertTrue("cached dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern().equals(sdf.toPattern()));
+		Assert.assertTrue("cached dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern()
+				.equals(sdf.toPattern()));
 	}
 	
 	@Test
