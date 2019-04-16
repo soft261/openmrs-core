@@ -597,8 +597,8 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	 * services are not available to the validatePassword (similar to how its used in the
 	 * initialization wizard), but that is not possible to set up on a test-by-test basis, so we
 	 * settle by making the user context not available.
-	 *
-	 * @see OpenmrsUtil#validatePassword(String, String, String)
+	 * 
+	 * @see OpenmrsUtil#validatePassword(String,String,String)
 	 */
 	@Test
 	public void validatePassword_shouldStillWorkWithoutAnOpenSession() {
@@ -826,7 +826,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#nullSafeEqualsIgnoreCase(String, String)
+	 * @see OpenmrsUtil#nullSafeEqualsIgnoreCase(String,String)
 	 */
 	@Test
 	public void nullSafeEqualsIgnoreCase_shouldBeCaseInsensitive() {
@@ -834,7 +834,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	}
 	
 	/**
-	 * @see OpenmrsUtil#nullSafeEqualsIgnoreCase(String, String)
+	 * @see OpenmrsUtil#nullSafeEqualsIgnoreCase(String,String)
 	 */
 	@Test
 	public void nullSafeEqualsIgnoreCase_shouldReturnFalseIfOnlyOneOfTheStringsIsNull() {
