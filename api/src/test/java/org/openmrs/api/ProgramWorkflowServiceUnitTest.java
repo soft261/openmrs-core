@@ -28,6 +28,7 @@ import org.openmrs.ProgramWorkflow;
 import org.openmrs.ProgramWorkflowState;
 import org.openmrs.api.db.ProgramWorkflowDAO;
 import org.openmrs.api.impl.ProgramWorkflowServiceImpl;
+import java.util.Date;
 
 /**
  * This class unit tests methods in the ProgramWorkflowService class.
@@ -227,6 +228,48 @@ public class ProgramWorkflowServiceUnitTest {
 	}
 	
 	@Test
+	public void triggerStateConversion_shouldFailGivenNullPatient() {
+		
+		exception.expect(APIException.class);
+		exception.expectMessage("Attempting to convert state of an invalid patient");
+		
+		Patient patient = null;
+		Concept concept = new Concept(1);
+		Date date = new Date(1);
+		
+		ProgramWorkflowServiceImpl programWorkflowService = new ProgramWorkflowServiceImpl();
+		programWorkflowService.triggerStateConversion(patient,concept,date);
+	}
+
+	@Test
+	public void triggerStateConversion_shouldFailGivenInvalidTriggerConcept() {
+		
+		exception.expect(APIException.class);
+		exception.expectMessage("Attempting to convert state for a patient without a valid trigger concept");
+		
+		Patient patient = new Patient(1);
+		Concept concept = null;
+		Date date = new Date(1);
+		
+		ProgramWorkflowServiceImpl programWorkflowService = new ProgramWorkflowServiceImpl();
+		programWorkflowService.triggerStateConversion(patient,concept,date);
+	}
+
+	@Test
+	public void triggerStateConversion_shouldFailGivenInvalidDate() {
+
+		exception.expect(APIException.class);
+		exception.expectMessage("Invalid date for converting patient state");
+
+		Patient patient = new Patient(1);
+		Concept concept = new Concept(1);
+		Date date = null;
+
+		ProgramWorkflowServiceImpl programWorkflowService = new ProgramWorkflowServiceImpl();
+		programWorkflowService.triggerStateConversion(patient, concept, date);
+	}
+	
+	@Test	
 	public void saveConceptStateConversion_shouldFailIfAllRequiredParametersMissing() {
 		
 		exception.expect(APIException.class);
@@ -234,6 +277,7 @@ public class ProgramWorkflowServiceUnitTest {
 		
 		ConceptStateConversion conceptStateConversion = new ConceptStateConversion(1);
 		pws.saveConceptStateConversion(conceptStateConversion);
+
 	}
 	
 	@Test
