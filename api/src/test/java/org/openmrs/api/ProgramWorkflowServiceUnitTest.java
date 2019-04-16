@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.openmrs.Concept;
+import org.openmrs.ConceptStateConversion;
 import org.openmrs.Patient;
 import org.openmrs.PatientProgram;
 import org.openmrs.PatientState;
@@ -223,5 +224,15 @@ public class ProgramWorkflowServiceUnitTest {
 		program.addWorkflow(workflow);
 		
 		pws.purgeProgram(program, true);
+	}
+	
+	@Test
+	public void saveConceptStateConversion_shouldFailIfRequiredParametersMissing() {
+		
+		exception.expect(APIException.class);
+		exception.expectMessage("ConceptStateConversion requires a Concept, ProgramWorkflow, and ProgramWorkflowState");
+		
+		ConceptStateConversion conceptStateConversion = new ConceptStateConversion(1);
+		pws.saveConceptStateConversion(conceptStateConversion);
 	}
 }
