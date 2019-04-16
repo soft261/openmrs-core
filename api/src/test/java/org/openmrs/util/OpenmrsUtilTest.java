@@ -101,7 +101,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		pi.setCreator(null);
 		
 		assertTrue("Just because the date is null, doesn't make it not in the list anymore", OpenmrsUtil.collectionContains(
-			identifiers, pi));
+		    identifiers, pi));
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		pi.setCreator(null);
 		
 		assertTrue("Just because the date is null, doesn't make it not in the list anymore", OpenmrsUtil.collectionContains(
-			identifiers, pi));
+		    identifiers, pi));
 	}
 	
 	/**
@@ -624,7 +624,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		// verify changing the pattern on our variable does not affect the cache
 		sdf.applyPattern("yyyymmdd");
 		Assert.assertTrue("initial dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern()
-			.equals(sdf.toPattern()));
+		        .equals(sdf.toPattern()));
 		
 		// the dateformat cache now contains the format for this locale; checking
 		// a second time will guarantee we are looking at cached data and not the
@@ -635,7 +635,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		// verify changing the pattern on our variable does not affect the cache
 		sdf.applyPattern("yyyymmdd");
 		Assert.assertTrue("cached dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern()
-			.equals(sdf.toPattern()));
+		        .equals(sdf.toPattern()));
 	}
 	
 	@Test
