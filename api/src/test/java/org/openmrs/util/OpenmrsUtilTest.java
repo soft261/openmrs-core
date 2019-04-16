@@ -80,9 +80,9 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 	 * @see OpenmrsUtil#collectionContains(Collection,Object)
 	 */
 	@Test
-	public void collectionContains_shouldUseEqualsMethodForComparisonInsteadOfCompareToGivenListCollection() 
+	public void collectionContains_shouldUseEqualsMethodForComparisonInsteadOfCompareToGivenListCollection()
 	{
-	
+		
 		ArrayList<PatientIdentifier> identifiers = new ArrayList<>();
 		
 		PatientIdentifier pi = new PatientIdentifier();
@@ -624,7 +624,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		// verify changing the pattern on our variable does not affect the cache
 		sdf.applyPattern("yyyymmdd");
 		Assert.assertTrue("initial dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern()
-				.equals(sdf.toPattern()));
+			.equals(sdf.toPattern()));
 		
 		// the dateformat cache now contains the format for this locale; checking
 		// a second time will guarantee we are looking at cached data and not the
@@ -635,7 +635,7 @@ public class OpenmrsUtilTest extends BaseContextSensitiveTest {
 		// verify changing the pattern on our variable does not affect the cache
 		sdf.applyPattern("yyyymmdd");
 		Assert.assertTrue("cached dateFormatCache pattern is modifiable", !OpenmrsUtil.getDateFormat(locale).toPattern()
-				.equals(sdf.toPattern()));
+			.equals(sdf.toPattern()));
 	}
 	
 	@Test
